@@ -1,0 +1,22 @@
+{
+    "manifest_version": 2,
+    "name": "AccountingCodes",
+    "version": "1",
+    "browser_action": {
+        "default_title": "Accounting Codes"
+    },
+    "description": "A Chrome extension, makes code entry easy and secure for Luca",
+    "permissions": [
+        "tabs",
+        "http://*/*",
+        "https://*/*"
+    ],
+    "content_scripts": [{
+        "matches": [
+            "*://*.luca.com.tr/*"
+        ],
+        "js": ["jquery.min.js", "popup.js"],
+        "run_at": "document_end",
+        "all_frames": true
+    }]
+}
