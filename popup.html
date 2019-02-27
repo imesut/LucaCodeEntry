@@ -1,0 +1,60 @@
+<head>
+</head>
+
+<html>
+<div id="corp1" class="active" style="display:block;">
+    <select id="selected_accounting_codes" style="width: 200px" name="cars" size="16">
+        <option style="height: 20px;" value="100">100 - Volvo</option>
+        <option style="height: 20px;" value="200">200 - Saab</option>
+        <option style="height: 20px;" value="300">300 - Fiat</option>
+        <option style="height: 20px;" value="400">400 - Audi</option>
+        <option style="height: 20px;" value="100">100 - Volvo</option>
+        <option style="height: 20px;" value="200">200 - Saab</option>
+        <option style="height: 20px;" value="300">300 - Fiat</option>
+        <option style="height: 20px;" value="400">400 - Audi</option>
+        <option style="height: 20px;" value="100">100 - Volvo</option>
+        <option style="height: 20px;" value="200">200 - Saab</option>
+        <option style="height: 20px;" value="300">300 - Fiat</option>
+        <option style="height: 20px;" value="400">400 - Audi</option>
+        <option style="height: 20px;" value="100">100 - Volvo</option>
+        <option style="height: 20px;" value="200">200 - Saab</option>
+        <option style="height: 20px;" value="300">300 - Fiat</option>
+        <option style="height: 20px;" value="400">400 - Audi</option>
+    </select>
+</div>
+
+<div id="corp2" class="passive" style="display:none">
+    <select id="selected_accounting_codes" style="width: 200px" name="cars" size="4">
+        <option style="height: 20px;" value="100">1000 - proje 2</option>
+        <option style="height: 20px;" value="200">2000 - jfbke</option>
+        <option style="height: 20px;" value="300">3000 - löşl</option>
+        <option style="height: 20px;" value="400">4000 - wqdd</option>
+    </select>
+</div>
+
+<button id="changeCorp" style="font-size: 10px;margin-top: 15px;">Şirketi Değiştir</button>
+
+<!-- 
+    Datalist is also convenient
+    <input list="browsers" name="browser">
+  <datalist id="browsers">
+    <option value="100">100 numaara</option>
+    <option value="200">Proje 2Proje 2 Proje 2</option>
+    <option value="300">WeWALK</option>
+    <option value="400">Hayal Ortağım</option>
+    <option value="500">TYT</option>
+  </datalist> -->
+
+
+<script>
+document.getElementById("changeCorp").addEventListener("click", function(){
+    passiveElId = document.getElementsByClassName("passive")[0].id;
+    activeElId = document.getElementsByClassName("active")[0].id;
+    document.getElementById(passiveElId).className = "active";
+    document.getElementById(passiveElId).style = "display:block";
+    document.getElementById(activeElId).className = "passive";
+    document.getElementById(activeElId).style = "display:none";
+});
+</script>
+
+</html>
