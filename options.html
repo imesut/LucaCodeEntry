@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'sha256-WOdSzz11/3cpqOdrm89LBL2UPwEU9EhbDtMy2OciEhs='">
+    <title>Luca Kod Giriş Eklentisi Ayarları</title>
+    <script src="options.js"></script>
+    <style>
+        body {
+            margin: 20px;
+            font-family: sans-serif;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        input,
+        textarea,
+        button, #company_box {
+            width: 400px;
+            margin: 10px;
+            min-height: 25px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1 id="heading">Luca Kod Giriş Eklentisi Ayarları</h1>
+    <p>Şirketleri eklemek için önce 'Bilgileri Güncelle' düğmesine basın, sayfa yenilendikten sonra 'yeni şirket ekle' diyebilirsiniz.</p>
+    <div style="display: none;">
+        <div class="template" id="-1">
+            <textarea id="company_name_-1" rows="1" placeholder="Şirket Adı"></textarea>
+            <br>
+            <a style="font-size: 12px; color: red;" href="#" class="delete" id="delete_-1" onclick="deleteBox(-1)">Bu şirketi sil</a>
+            <br>
+            <textarea id="company_codes_-1" rows="10" placeholder="101, Arge giderleri
+102, Keyfi giderler"></textarea>
+            <br>
+            <hr>
+        </div>
+    </div>
+    <div id="company_holder">
+        <div class="company" id="0">
+            <textarea id="company_name_0" rows="1" placeholder="Şirket Adı"></textarea>
+            <br>
+            <a style="font-size: 12px; color: red;" href="#" class="delete" id="delete_0" onclick="deleteBox(0)">Bu şirketi sil</a>
+            <br>
+            <textarea id="company_codes_0" rows="10" placeholder="101, Arge giderleri
+102, Keyfi giderler"></textarea>
+            <br>
+            <hr>
+        </div>
+    </div>
+
+    <br>
+    <button id="newCompany">Yeni Şirket Ekle</button>
+    <br>
+    <button id="save">Bilgileri Güncelle</button>
+
+</body>
+
+</html>
