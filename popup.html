@@ -1,43 +1,32 @@
+<html>
+
 <head>
     <script src="jquery.min.js"></script>
-    <script src="code-list.js"></script>
+    <!-- <script src="code-list.js"></script> -->
     <script src="popup.js"></script>
 </head>
 
-<html>
-<div id="corp1" class="active" style="display:block;">
-    <select id="selected_accounting_codes" style="width: 200px" name="cars" size="16">
-        <option style="height: 20px;" value="100">100 - Volvo</option>
-        <option style="height: 20px;" value="200">200 - Saab</option>
-        <option style="height: 20px;" value="300">300 - Fiat</option>
-        <option style="height: 20px;" value="400">400 - Audi</option>
-        <option style="height: 20px;" value="100">100 - Volvo</option>
-        <option style="height: 20px;" value="200">200 - Saab</option>
-        <option style="height: 20px;" value="300">300 - Fiat</option>
-        <option style="height: 20px;" value="400">400 - Audi</option>
-        <option style="height: 20px;" value="100">100 - Volvo</option>
-        <option style="height: 20px;" value="200">200 - Saab</option>
-        <option style="height: 20px;" value="300">300 - Fiat</option>
-        <option style="height: 20px;" value="400">400 - Audi</option>
-        <option style="height: 20px;" value="100">100 - Volvo</option>
-        <option style="height: 20px;" value="200">200 - Saab</option>
-        <option style="height: 20px;" value="300">300 - Fiat</option>
-        <option style="height: 20px;" value="400">400 - Audi</option>
+<body>
+
+    <div id="corp1" class="active" style="display:block;">
+        <select id="selected_accounting_codes" style="width: 200px" name="cars" size="16">
+        </select>
+    </div>
+
+    <div id="corp2" class="passive" style="display:none">
+        <select id="selected_accounting_codes" style="width: 200px" name="cars" size="4">
+            <option style="height: 20px;" value="100">1000 - proje 2</option>
+            <option style="height: 20px;" value="200">2000 - jfbke</option>
+            <option style="height: 20px;" value="300">3000 - löşl</option>
+            <option style="height: 20px;" value="400">4000 - wqdd</option>
+        </select>
+    </div>
+
+    <select style="width: 200px;" id="changeCorp2">
     </select>
-</div>
+    <!-- <button id="changeCorp" style="font-size: 10px;margin-top: 15px;">Şirketi Değiştir</button> -->
 
-<div id="corp2" class="passive" style="display:none">
-    <select id="selected_accounting_codes" style="width: 200px" name="cars" size="4">
-        <option style="height: 20px;" value="100">1000 - proje 2</option>
-        <option style="height: 20px;" value="200">2000 - jfbke</option>
-        <option style="height: 20px;" value="300">3000 - löşl</option>
-        <option style="height: 20px;" value="400">4000 - wqdd</option>
-    </select>
-</div>
-
-<button id="changeCorp" style="font-size: 10px;margin-top: 15px;">Şirketi Değiştir</button>
-
-<!-- 
+    <!-- 
     Datalist is also convenient
     <input list="browsers" name="browser">
   <datalist id="browsers">
@@ -49,7 +38,7 @@
   </datalist> -->
 
 
-<script>
+    <!-- <script>
 document.getElementById("changeCorp").addEventListener("click", function(){
     passiveElId = document.getElementsByClassName("passive")[0].id;
     activeElId = document.getElementsByClassName("active")[0].id;
@@ -58,6 +47,8 @@ document.getElementById("changeCorp").addEventListener("click", function(){
     document.getElementById(activeElId).className = "passive";
     document.getElementById(activeElId).style = "display:none";
 });
-</script>
+</script> -->
 
+
+</body>
 </html>

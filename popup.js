@@ -1,4 +1,62 @@
+window.onload = () => {
+    let selectEl = document.getElementById("changeCorp2");
+    selectEl.addEventListener("change", function () {
+        setListOfCompany(selectEl.value);
+    });
+}
+
+
 var last_item_id;
+var lucaData = {};
+
+let getData = new Promise((resolve, reject) => {
+    chrome.storage.local.get(["lucaData"], (result) => {
+        lucaData = result.lucaData;
+        resolve();
+    })
+});
+
+
+getData.then(() => {
+    frame();
+    setListOfCompany(0);
+
+})
+
+let frame = () => {
+    let list = document.getElementById("changeCorp2");
+
+    let length = Object.keys(lucaData).length;
+    for (var i = 0; i < length; i++) {
+        var option = document.createElement("option");
+        company = lucaData[i];
+        option.value = company.id;
+        option.innerHTML = company.title;
+        list.appendChild(option);
+    }
+}
+
+let setSelectedCompany = (id) => {
+    let selectEl = document.getElementById("changeCorp2");
+    selectEl.children.forEach(el => {
+        if (el.id == id) el.setAttribute("selected");
+    });
+}
+
+let setListOfCompany = (id) => {
+    let optionBox = document.getElementById("selected_accounting_codes");
+    optionBox.innerHTML = "";
+    lucaData[id].codes.forEach(pair => {
+        var option = document.createElement("option");
+        option.style = "height: 20px;"
+        option.value = pair[0];
+        option.innerHTML = pair[0] + " - " + pair[1];
+        optionBox.appendChild(option);
+    });
+
+}
+
+
 
 // If the page has related field, add listeners
 if ($('input[name="MIKTAR"]').length > 0) {
