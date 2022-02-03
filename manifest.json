@@ -5,7 +5,6 @@
     "browser_action": {
         "default_title": "Luca Kod Giriş Yardımcısı"
     },
-    "content_security_policy": "script-src 'self' 'sha256-WOdSzz11/3cpqOdrm89LBL2UPwEU9EhbDtMy2OciEhs='",
     "description": "A Chrome extension, makes code entry easy and secure for Luca",
     "icons": {
         "16": "icon16.png",

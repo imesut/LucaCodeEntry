@@ -54,7 +54,7 @@ window.onload = () => {
         //let template = document.getElementById("-1");
         abstractContainer = document.createElement("div");
         //newEl = template.outerHTML.toString();
-        newEl = `<div class="template" id="-1"><textarea id="company_name_-1" rows="1" placeholder="Şirket Adı"></textarea><br><a style="font-size: 12px; color: red;" href="#" class="delete" id="delete_-1" onclick="deleteBox(-1)">Bu şirketi sil</a><br><textarea id="company_codes_-1" rows="10" placeholder="101, Arge giderleri
+        newEl = `<div class="template" id="-1"><textarea id="company_name_-1" rows="1" placeholder="Şirket Adı"></textarea><br><a style="font-size: 12px; color: red;" href="#" class="delete" id="delete_-1">Bu şirketi sil</a><br><textarea id="company_codes_-1" rows="10" placeholder="101, Arge giderleri
 102, Keyfi giderler"></textarea><br><hr></div>`;
         newEl = newEl.replace("template", "company");
         for (let i = 0; i < 5; i++){
@@ -99,6 +99,27 @@ window.onload = () => {
             document.getElementById("heading").innerText += " - Güncellendi";
         })
     })
+
+
+    document.addEventListener("click", (e) => {
+        e = e || window.event;
+        //0: a element
+        //1: container of the a element: company box
+        id = e.path[1].id;
+        if (e.path[0].tagName=="A"){
+            deleteBox(id);
+            last_id -= 1;
+            resetIds(document.getElementById("company_holder"));
+        }
+    });
+
+
+}
+
+let resetIds = (container) => {
+    for (let id = 0; id < container.children.length; id++) {
+        container.children[id].id = id;
+    }
 }
 
 let getText = (el, order) => {
@@ -108,3 +129,4 @@ let getText = (el, order) => {
 let deleteBox = (id) => {
     document.getElementById(id).remove();
 }
+
