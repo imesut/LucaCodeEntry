@@ -1,7 +1,18 @@
 window.onload = () => {
+
+    chrome.storage.local.get(["lucaLastSelectedCompany"], (result) => {
+        var id = result.lucaLastSelectedCompany;
+        console.log(id);
+        setSelectedCompany(id);
+    })
+
     let selectEl = document.getElementById("changeCorp2");
     selectEl.addEventListener("change", function () {
-        setListOfCompany(selectEl.value);
+        val = selectEl.value;
+        setListOfCompany(val);
+        chrome.storage.local.set({
+            lucaLastSelectedCompany: val
+        })
     });
 }
 
@@ -15,7 +26,6 @@ let getData = new Promise((resolve, reject) => {
         resolve();
     })
 });
-
 
 getData.then(() => {
     frame();
@@ -38,9 +48,13 @@ let frame = () => {
 
 let setSelectedCompany = (id) => {
     let selectEl = document.getElementById("changeCorp2");
-    selectEl.children.forEach(el => {
-        if (el.id == id) el.setAttribute("selected");
-    });
+    children = selectEl.children;
+    for (let i = 0; i < children.length; i++) {
+        el = children[i];
+        if (el.value == id) {
+            el.selected = "selected";
+        };
+    }
 }
 
 let setListOfCompany = (id) => {
@@ -128,7 +142,7 @@ if ($('input[name="MIKTAR"]').length > 0) {
             // If option panel and elements inside clicked
             else if (e.path[0].id == optionElId || e.path[2].id == optionElId) {
                 // do nothing
-            } else if (e.path[0].id == "changeCorp") {
+            } else if (e.path[0].id == "changeCorp2") {
                 // do nothing; keep view available
             } else {
                 optionDiv.style.display = "none";
