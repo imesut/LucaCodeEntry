@@ -54,7 +54,8 @@ window.onload = () => {
         //let template = document.getElementById("-1");
         abstractContainer = document.createElement("div");
         //newEl = template.outerHTML.toString();
-        newEl = '<div class="template" id="-1"><textarea id="company_name_-1" rows="1" placeholder="Şirket Adı"></textarea><br><a style="font-size: 12px; color: red;" href="#" class="delete" id="delete_-1" onclick="deleteBox(-1)">Bu şirketi sil</a><br><textarea id="company_codes_-1" rows="10" placeholder="101, Arge giderleri 102, Keyfi giderler"></textarea><br><hr></div>';
+        newEl = `<div class="template" id="-1"><textarea id="company_name_-1" rows="1" placeholder="Şirket Adı"></textarea><br><a style="font-size: 12px; color: red;" href="#" class="delete" id="delete_-1" onclick="deleteBox(-1)">Bu şirketi sil</a><br><textarea id="company_codes_-1" rows="10" placeholder="101, Arge giderleri
+102, Keyfi giderler"></textarea><br><hr></div>`;
         newEl = newEl.replace("template", "company");
         for (let i = 0; i < 5; i++){
             newEl = newEl.replace("-1", id);
@@ -68,37 +69,40 @@ window.onload = () => {
         drawBox();
     })
 
-    // document.getElementById("save").addEventListener("click", () => {
+    document.getElementById("save").addEventListener("click", () => {
 
-    //     var data = []
-    //     let companies = document.getElementsByClassName("company");
+        var data = []
+        let companies = document.getElementsByClassName("company");
 
-    //     Array.prototype.forEach.call(companies, (company) => {
-    //         var company = {
-    //             "id": company.id,
-    //             "title": getText(company, 0),
-    //             "codes": []
-    //         }
-    //         var codes = getText(company, 1).split(/\r?\n/)
-    //         codes.forEach((line) => {
-    //             field_code = line.split(", ")[0]
-    //             description = line.split(", ")[1]
-    //             company["codes"].push([field_code, description])
-    //         })
+        Array.prototype.forEach.call(companies, (company) => {
+            console.log(company);
+            console.log(companies);
+            var companyObj = {
+                "id": company.id,
+                "title": getText(company, 0),
+                "codes": []
+            }
+            var codes = getText(company, 1).split(/\r?\n/);
+            console.log(codes);
+            codes.forEach((line) => {
+                field_code = line.split(", ")[0]
+                description = line.split(", ")[1]
+                companyObj["codes"].push([field_code, description])
+            })
 
-    //         data.push(company);
-    //     });
+            data.push(companyObj);
+        });
 
-    //     chrome.storage.local.set({
-    //         lucaData: data
-    //     }, () => {
-    //         document.getElementById("heading").innerText += " - Güncellendi";
-    //     })
-    // })
+        chrome.storage.local.set({
+            lucaData: data
+        }, () => {
+            document.getElementById("heading").innerText += " - Güncellendi";
+        })
+    })
 }
 
 let getText = (el, order) => {
-    return el.getElementsByTagName("textarea")[order].innerText;
+    return el.getElementsByTagName("textarea")[order].value;
 }
 
 let deleteBox = (id) => {
