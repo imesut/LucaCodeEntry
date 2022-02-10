@@ -1,20 +1,23 @@
-window.onload = () => {
+div = document.createElement("div");
+div.style.width = "220px";
+div.style.height = "300 px";
+div.style.position = "sticky";
+div.style.height = "300 px";
+div.style.left = "0px";
+div.style.bottom = "0px";
+div.style.padding = "10px";
+div.style.backgroundColor="#fdfdfd"
+div.style.border = "1px solid #eee"
+div.innerHTML = '<select size="16" id="selected_accounting_codes" style="width: 200px; border: 1px solid #eee;"></select>';
+div.innerHTML += '<select style="width: 200px;" id="changeCorp2"></select>';
+div.style.display = "none";
+div.id = "container_plugin";
+document.body.appendChild(div);
 
-    chrome.storage.local.get(["lucaLastSelectedCompany"], (result) => {
-        var id = result.lucaLastSelectedCompany;
-        console.log(id);
-        setSelectedCompany(id);
-    })
+// window.onload = () => {
 
-    let selectEl = document.getElementById("changeCorp2");
-    selectEl.addEventListener("change", function () {
-        val = selectEl.value;
-        setListOfCompany(val);
-        chrome.storage.local.set({
-            lucaLastSelectedCompany: val
-        })
-    });
-}
+
+// }
 
 
 var last_item_id;
@@ -34,17 +37,32 @@ getData.then(() => {
 })
 
 let frame = () => {
-    let list = document.getElementById("changeCorp2");
+    list = document.getElementById("changeCorp2");
 
     let length = Object.keys(lucaData).length;
     for (var i = 0; i < length; i++) {
-        var option = document.createElement("option");
+        option = document.createElement("option");
         company = lucaData[i];
         option.value = company.id;
         option.innerHTML = company.title;
         list.appendChild(option);
     }
 }
+
+chrome.storage.local.get(["lucaLastSelectedCompany"], (result) => {
+    var id = result.lucaLastSelectedCompany;
+    console.log("ıdd"+id);
+    setSelectedCompany(id);
+})
+
+let selectEl = document.getElementById("changeCorp2");
+selectEl.addEventListener("change", function () {
+    val = selectEl.value;
+    setListOfCompany(val);
+    chrome.storage.local.set({
+        lucaLastSelectedCompany: val
+    })
+});
 
 let setSelectedCompany = (id) => {
     let selectEl = document.getElementById("changeCorp2");
@@ -72,60 +90,69 @@ let setListOfCompany = (id) => {
 
 
 
+lucaMiktarId = "";
+
 // If the page has related field, add listeners
 if ($('input[name="MIKTAR"]').length > 0) {
 
     optionElId = "option_el_accounting_codes";
     selectElId = "selected_accounting_codes"
 
-    optionList = ""
+    //optionList = ""
 
-    liste = liste.split("\n");
+    // liste = liste.split("\n");
 
-    for (var index in liste) {
-        if (liste[index].length > 0) {
-            var code = liste[index].split(",")
-            optionList += '<option style="height: 25px" value="' + code[0] + '">' + code[0] + ' ' + code[1] + '</option>\n';
-        }
-    }
+    // for (var index in liste) {
+    //     if (liste[index].length > 0) {
+    //         var code = liste[index].split(",")
+    //         optionList += '<option style="height: 25px" value="' + code[0] + '">' + code[0] + ' ' + code[1] + '</option>\n';
+    //     }
+    // }
 
 
     const loadOptionBox = new Promise(function (resolve, reject) {
 
-        // Option panel
-        var optionEl = document.createElement('div');
-        optionEl.id = optionElId;
-        optionEl.style.cssText = 'width: 200px; height: 300px; position: sticky; border: 1px solid #eee; background-color: #fdfdfd; left: 0px; bottom: 0px; padding: 10px;display: none';
+        // // Option panel
+        // var optionEl = document.createElement('div');
+        // optionEl.id = optionElId;
+        // optionEl.style.cssText = 'width: 200px; height: 300px; position: sticky; border: 1px solid #eee; background-color: #fdfdfd; left: 0px; bottom: 0px; padding: 10px;display: none';
 
-        // Hodii is default project
-        optionEl.innerHTML = '<select id="' + selectElId + '" class="hodii" style="width: 200px" size="10">' + optionList + '</select>';
-        document.body.appendChild(optionEl);
+        // // Hodii is default project
+        // optionEl.innerHTML = '<select id="' + selectElId + '" class="hodii" style="width: 200px" size="10">' + optionList + '</select>';
+
+        // changeCorp2 = document.getElementById("changeCorp2");
+        document.getElementById("container_plugin").style.display = "block";
+        console.log(document.getElementById("container_plugin"));
 
         resolve('option box loading is done');
     });
 
 
     loadOptionBox.then(function () {
-        optionDiv = document.getElementById(optionElId);
-        selectElement = document.getElementById(selectElId);
 
-        // Event listeners on options
+        box = document.getElementById("container_plugin");
+
+        // optionDiv = document.getElementById(optionElId);
+        selectElement = document.getElementById("selected_accounting_codes");
+
+        // // Event listeners on options
         selectElement.addEventListener("change", function () {
-            document.getElementById(last_item_id).value = selectElement.value;
+            document.getElementById(lucaMiktarId).value = selectElement.value;
         });
 
         // When an option selected with Enter key
         selectElement.addEventListener('keyup', function (e) {
             if (e.which == 13) {
-                optionDiv.style.display = "none";
-                document.getElementById(last_item_id).focus();
+                box.style.display = "none";
+                document.getElementById(lucaMiktarId).focus();
             }
         });
         // Open option panel when related field focused with tab (or any) key
         document.addEventListener("keyup", function (e) {
             if (e.path[0].name == "MIKTAR") {
-                optionDiv.style.display = "block";
-                last_item_id = e.path[0].id;
+                box.style.display = "block";
+                console.log(e.path[0].id);
+                lucaMiktarId = e.path[0].id;
                 selectElement.focus();
             }
         });
@@ -134,8 +161,8 @@ if ($('input[name="MIKTAR"]').length > 0) {
         document.addEventListener("click", function (e) {
             e = e || window.event;
             if (e.path[0].name == "MIKTAR") {
-                optionDiv.style.display = "block";
-                last_item_id = e.path[0].id;
+                box.style.display = "block";
+                lucaMiktarId = e.path[0].id;
                 selectElement.focus();
             }
 
@@ -145,7 +172,7 @@ if ($('input[name="MIKTAR"]').length > 0) {
             } else if (e.path[0].id == "changeCorp2") {
                 // do nothing; keep view available
             } else {
-                optionDiv.style.display = "none";
+                box.style.display = "none";
             }
         });
     });

@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Luca Kod Giriş Yardımcısı v2",
-    "version": "2.0",
+    "version": "2.1",
     "browser_action": {
         "default_title": "Luca Kod Giriş Yardımcısı"
     },
@@ -22,7 +22,7 @@
         "matches": [
             "*://*.luca.com.tr/*"
         ],
-        "js": ["code-list.js","jquery.min.js", "popup.js", "options.js"],
+        "js": ["jquery.min.js", "popup.js"],
         "run_at": "document_end",
         "all_frames": true
     }]
